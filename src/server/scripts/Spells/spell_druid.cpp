@@ -34,6 +34,7 @@ enum DruidSpells
     SPELL_DRUID_BLESSING_OF_THE_ANCIENTS            = 202360,
     SPELL_DRUID_BLESSING_OF_ELUNE                   = 202737,
     SPELL_DRUID_BLESSING_OF_ANSHE                   = 202739,
+    SPELL_DRUID_BRISTLING_FUR_GAIN_RAGE             = 204031,
     SPELL_DRUID_STARLORD_DUMMY                      = 202345,
     SPELL_DRUID_STARLORD_SOLAR                      = 202416,
     SPELL_DRUID_STARLORD_LUNAR                      = 202423,
@@ -125,6 +126,53 @@ enum RestorationAffinitySpells
     SPELL_DRUID_RESTORATION_AFFINITY    = 197492
 };
 
+// 155835 - Bristling Fur
+
+class spell_dru_bristling_fur : public AuraScript
+
+{
+
+    PrepareAuraScript(spell_dru_bristling_fur);
+
+    bool Validate(SpellInfo const* /*spellInfo*/) override
+
+    {
+
+        return ValidateSpellInfo({ SPELL_DRUID_BRISTLING_FUR_GAIN_RAGE });
+
+    }
+
+    void HandleProc(AuraEffect* /*aurEff*/, ProcEventInfo& eventInfo)
+
+    {
+
+        // BristlingFurRage = 100 * Damage / MaxHealth.
+
+        if (DamageInfo* damageInfo = eventInfo.GetDamageInfo())
+
+        {
+
+            Unit* target = GetTarget();
+
+            uint32 rage = 100.0f * (float)damageInfo->GetDamage() / (float)target->GetMaxHealth();
+
+            if (rage > 0)
+
+                target->CastCustomSpell(SPELL_DRUID_BRISTLING_FUR_GAIN_RAGE, SPELLVALUE_BASE_POINT0, rage, target, TRIGGERED_FULL_MASK);
+
+        }
+
+    }
+
+    void Register() override
+
+    {
+
+        OnEffectProc += AuraEffectProcFn(spell_dru_bristling_fur::HandleProc, EFFECT_0, SPELL_AURA_DUMMY);
+
+    }
+
+};
 // 210706 - Gore 7.3.5
  class spell_dru_gore : public AuraScript
  {
@@ -2677,7 +2725,7 @@ void AddSC_druid_spell_scripts()
     RegisterSpellScript(spell_dru_shred);
     RegisterAuraScript(aura_dru_guardian_affinity_resto);
     RegisterAuraScript(aura_dru_guardian_affinity_dps);
-
+    RegisterAuraScript(spell_dru_bristling_fur);
     RegisterSpellScript(spell_dru_thrash_bear);
     RegisterAuraScript(aura_dru_thrash_bear);
     RegisterSpellScript(spell_dru_blessing_of_the_ancients);
