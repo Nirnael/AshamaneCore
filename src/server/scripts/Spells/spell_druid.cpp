@@ -131,47 +131,24 @@ enum RestorationAffinitySpells
 class spell_dru_bristling_fur : public AuraScript
 
 {
-
     PrepareAuraScript(spell_dru_bristling_fur);
 
-    bool Validate(SpellInfo const* /*spellInfo*/) override
-
+    void HandleProc(AuraEffect const* /*aurEff*/, ProcEventInfo& eventInfo)
     {
-
-        return ValidateSpellInfo({ SPELL_DRUID_BRISTLING_FUR_GAIN_RAGE });
-
-    }
-
-    void HandleProc(AuraEffect* /*aurEff*/, ProcEventInfo& eventInfo)
-
-    {
-
         // BristlingFurRage = 100 * Damage / MaxHealth.
-
         if (DamageInfo* damageInfo = eventInfo.GetDamageInfo())
-
         {
-
             Unit* target = GetTarget();
-
             uint32 rage = 100.0f * (float)damageInfo->GetDamage() / (float)target->GetMaxHealth();
-
             if (rage > 0)
-
                 target->CastCustomSpell(SPELL_DRUID_BRISTLING_FUR_GAIN_RAGE, SPELLVALUE_BASE_POINT0, rage, target, TRIGGERED_FULL_MASK);
-
         }
-
     }
 
     void Register() override
-
-    {
-
+    {        
         OnEffectProc += AuraEffectProcFn(spell_dru_bristling_fur::HandleProc, EFFECT_0, SPELL_AURA_DUMMY);
-
     }
-
 };
 // 210706 - Gore 7.3.5
  class spell_dru_gore : public AuraScript
