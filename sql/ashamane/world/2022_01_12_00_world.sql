@@ -35,7 +35,7 @@ DELETE FROM npc_vendor WHERE entry = 50304;
 INSERT INTO npc_vendor (entry, slot, item, maxcount, incrtime, ExtendedCost, type, BonusListIDs, PlayerConditionID, IgnoreFiltering, VerifiedBuild) VALUES
 (50304,1,67529,0,0,0,1, NULL,0,0,1), -- Undercity Satchel
 (50304,2,64920,0,0,0,1, NULL,0,0,1), -- Mantle of Undercity
-(50304,3,64921,0,0,0,1, NULL,0,0,1=, -- Cape of Undercity
+(50304,3,64921,0,0,0,1, NULL,0,0,1), -- Cape of Undercity
 (50304,4,64922,0,0,0,1, NULL,0,0,1), -- Shroud of Undercity
 (50304,5,45583,0,0,0,1, NULL,0,0,1); -- Undercity Tabard
 
@@ -63,11 +63,11 @@ INSERT INTO npc_vendor (entry, slot, item, maxcount, incrtime, ExtendedCost, typ
 
 DELETE FROM npc_vendor WHERE entry = 50306;
 INSERT INTO npc_vendor (entry, slot, item, maxcount, incrtime, ExtendedCost, type, BonusListIDs, PlayerConditionID, IgnoreFiltering, VerifiedBuild) VALUES
-50306,1,67527,0,0,0,1, NULL,0,0,1, -- Exodar Satchel
-50306,2,64889,0,0,0,1, NULL,0,0,1, -- Mantle of Exodar
-50306,3,64890,0,0,0,1, NULL,0,0,1, -- Cape of Exodar
-50306,4,64891,0,0,0,1, NULL,0,0,1, -- Shroud of Exodar
-50306,5,45580,0,0,0,1, NULL,0,0,1, -- Exodar Tabard
+(50306,1,67527,0,0,0,1, NULL,0,0,1), -- Exodar Satchel
+(50306,2,64889,0,0,0,1, NULL,0,0,1), -- Mantle of Exodar
+(50306,3,64890,0,0,0,1, NULL,0,0,1), -- Cape of Exodar
+(50306,4,64891,0,0,0,1, NULL,0,0,1), -- Shroud of Exodar
+(50306,5,45580,0,0,0,1, NULL,0,0,1); -- Exodar Tabard
 
 -- Magistrix Nizara <Silvermoon City Quartermaster>
 
